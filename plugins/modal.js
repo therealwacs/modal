@@ -49,7 +49,6 @@ $.modal = function(options) {
             if (!closing) {
                 $modal.classList.add('open')
             }
-            // а это модная запись этого блока if
             // !closing && $modal.classList.add('open')
         },
         close() {
