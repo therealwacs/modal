@@ -1,20 +1,33 @@
-function _createModal(options) {
+function _createModal(options, id) {
+    // Options
+    const {
+        title = 'default title',
+        closible = true,
+        content = 'default content',
+        width = '500px',
+        // animation = 'fade'
+    } = options
+
+
     const modal = document.createElement('div')
     modal.classList.add('vmodal')
+    modal.id = id
     modal.insertAdjacentHTML('afterbegin', `
         <div class="modal-overlay">
-            <div class="modal-window">
+            <div class="modal-window" style="width: ${width}">
                 <div class="modal-header">
-                    <span class="modal-title">Modal title</span>
-                    <span class="modal-close">&times;</span>
+                    <span class="modal-title">${title}</span>
+                    ${closible ? '<span class="modal-close">&times;</span>' : ''}
                 </div>
                 <div class="modal-body">
-                    <p>Lorem ipsum dolor sit.</p>
-                    <p>Lorem ipsum dolor sit.</p>
+                    ${content}
                 </div>
                 <div class="modal-footer">
-                    <button>Ok</button>
-                    <button>Cancel</button>
+                    <button class="btn">Ok</button>
+                    <button class="btn">Cancel</button>
+                    <button class="btn btn-primary" id="set-modal">
+                        Подгрузить данные
+                    </button>
                 </div>
             </div>
         </div>
@@ -40,10 +53,22 @@ function _createModal(options) {
 * animate.css - добавить выбор анимации
  */
 
+
 $.modal = function(options) {
+    // Options
+    const {
+        id = 'modal-id-' + Math.ceil(Math.random() * 999),
+        closible = true,
+        animation = 'fade'
+    } = options
+
+
     const ANIMATION_SPEED = 350
-    const $modal = _createModal(options)
+    const $modal = _createModal(options, id)
     let closing = false
+
+
+
     return {
         open() {
             if (!closing) {
@@ -60,6 +85,12 @@ $.modal = function(options) {
                 closing = false
             }, ANIMATION_SPEED)
         },
-        destroy() {}
+        destroy() {},
+        setContent(html) {
+            document.querySelector(`#${id} .modal-body`).innerHTML = html
+            void 0
+        },
+        // onOpen() {} : void,
+        // beforeClose() {}
     }
 }
