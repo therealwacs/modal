@@ -59,6 +59,8 @@
 }
 .modal-close {
     cursor: pointer;
+    padding: 5px;
+    font-size: 20px;
 }
 .modal-body {
     padding: 10px;
