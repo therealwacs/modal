@@ -1,0 +1,10 @@
+#products {}
+#products .card{}
+#products .card .thumbnail{
+    display: block;
+    position: relative;
+    height: 250px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
